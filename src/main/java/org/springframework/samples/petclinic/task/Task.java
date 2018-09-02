@@ -49,11 +49,11 @@ public class Task {
 
 
     public String getDesc() {
-        return description;
+        return desc;
     }
 
-    public void setDesc(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getTitle() {
