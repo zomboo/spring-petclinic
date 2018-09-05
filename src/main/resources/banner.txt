@@ -1,3 +1,2 @@
 ----------------zomboo-----------------
 :: Built with Spring Boot :: ${spring-boot.version}
-

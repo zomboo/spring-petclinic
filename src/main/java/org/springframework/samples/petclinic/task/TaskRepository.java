@@ -15,12 +15,7 @@
  */
 package org.springframework.samples.petclinic.task;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.repository.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Repository class for <code>Vet</code> domain objects All method names are compliant with Spring Data naming
@@ -31,15 +26,15 @@ import java.util.Collection;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-public interface TaskRepository extends Repository<Task, Integer> {
+public interface TaskRepository extends JpaRepository<Task, Long> {
 
     /**
      * Retrieve all <code>Vet</code>s from the data store.
      *
      * @return a <code>Collection</code> of <code>Vet</code>s
      */
-    @Transactional(readOnly = true)
-    @Cacheable("tasks")
-    Collection<Task> findAll() throws DataAccessException;
+    Task findById(long id);
+
+    Long deleteById(long id);
 
 }

@@ -15,13 +15,8 @@
  */
 package org.springframework.samples.petclinic.task;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.samples.petclinic.model.Person;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
-import java.util.*;
+
 
 /**
  * Simple JavaBean domain object representing a veterinarian.
@@ -33,35 +28,37 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
     private String desc;
     private String title;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Task setId(long id) {
         this.id = id;
+        return this;
     }
-
 
 
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public Task setDesc(String desc) {
         this.desc = desc;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Task setTitle(String title) {
         this.title = title;
+        return this;
     }
 
 }

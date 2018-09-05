@@ -16,9 +16,13 @@
 package org.springframework.samples.petclinic.task;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,30 +34,14 @@ import java.util.Map;
 @Controller
 class TaskController {
 
-    private final TaskRepository tasks;
+    @Resource
+    TaskService taskService;
 
-    public TaskController(TaskRepository clinicService) {
-        this.tasks = clinicService;
-    }
-
-    @GetMapping("/tasks.html")
-    public String showVetList(Map<String, Object> model) {
-        // Here we are returning an object of type 'Vets' rather than a collection of Vet
-        // objects so it is simpler for Object-Xml mapping
-        Tasks vets = new Tasks();
-        vets.getVetList().addAll(this.tasks.findAll());
-        model.put("vets", vets);
-        return "vets/vetList";
-    }
-
-    @GetMapping({ "/tasks" })
-    public @ResponseBody
-    Tasks showResourcesVetList() {
-        // Here we are returning an object of type 'Vets' rather than a collection of Vet
-        // objects so it is simpler for JSon/Object mapping
-        Tasks vets = new Tasks();
-        vets.getVetList().addAll(this.tasks.findAll());
-        return vets;
+    @RequestMapping("/task")
+    public String list(Model model) {
+        List<Task> tasks = taskService.getTaskList();
+        model.addAttribute("tasks", tasks);
+        return "tasks/taskList";
     }
 
 }
